@@ -1,4 +1,4 @@
-# Перед заупуском контейнера добавитье API https://yandex.ru/dev/geocode/doc/ru/respons
+# Перед заупуском контейнера добавитье API_KEY в .env (https://yandex.ru/dev/geocode/doc/ru/respons)
  
  запустить контейнер 
  ```
