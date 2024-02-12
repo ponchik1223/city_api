@@ -1,0 +1,34 @@
+version: '3.5'
+
+services:
+  db:
+    image: postgres:15.3-alpine
+    container_name: db_app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    env_file:
+      - cities_app/.env
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: cities_app/
+    env_file:
+      - cities_app/.env
+    container_name: fastapi_app
+    restart: on-failure
+    ports:
+      - 8000:8000
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+networks:
+  app-network:
+
